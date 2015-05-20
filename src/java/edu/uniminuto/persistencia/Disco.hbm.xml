@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Disco" table="disco" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="genero" class="edu.uniminuto.persistencia.Genero" fetch="select">
+            <column name="genero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="interprete" class="edu.uniminuto.persistencia.Interprete" fetch="select">
+            <column name="interprete" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="200" not-null="true" />
+        </property>
+        <property name="imagen" type="string">
+            <column name="imagen" length="200" not-null="true" />
+        </property>
+        <property name="anhio" type="date">
+            <column name="anhio" length="4" not-null="true" />
+        </property>
+        <set name="compradiscos" table="compradisco" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="disco" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compradisco" />
+        </set>
+        <set name="discopropietarios" table="discopropietario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="disco" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Discopropietario" />
+        </set>
+        <set name="discocancions" table="discocancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="disco" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Discocancion" />
+        </set>
+    </class>
+</hibernate-mapping>

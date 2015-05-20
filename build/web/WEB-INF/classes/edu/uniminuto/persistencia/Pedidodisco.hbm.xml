@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Pedidodisco" table="pedidodisco" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="discopropietario" class="edu.uniminuto.persistencia.Discopropietario" fetch="select">
+            <column name="discop" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pedido" class="edu.uniminuto.persistencia.Pedido" fetch="select">
+            <column name="pedido" not-null="true" />
+        </many-to-one>
+        <property name="comentario" type="string">
+            <column name="comentario" length="200" />
+        </property>
+        <property name="enviado" type="int">
+            <column name="enviado" not-null="true" />
+        </property>
+        <property name="fechaenvio" type="timestamp">
+            <column name="fechaenvio" length="19" />
+        </property>
+        <property name="rechazado" type="int">
+            <column name="rechazado" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

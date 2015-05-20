@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Pedido" table="pedido" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="edu.uniminuto.persistencia.Persona" fetch="select">
+            <column name="comprador" not-null="true" />
+        </many-to-one>
+        <property name="fechapedido" type="timestamp">
+            <column name="fechapedido" length="19" not-null="true" />
+        </property>
+        <property name="total" type="java.lang.Long">
+            <column name="total" />
+        </property>
+        <property name="descartado" type="int">
+            <column name="descartado" />
+        </property>
+        <set name="pedidodiscos" table="pedidodisco" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pedido" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Pedidodisco" />
+        </set>
+        <set name="pedidocancions" table="pedidocancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pedido" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Pedidocancion" />
+        </set>
+    </class>
+</hibernate-mapping>

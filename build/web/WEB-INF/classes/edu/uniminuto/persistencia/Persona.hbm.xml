@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Persona" table="persona" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="rol" class="edu.uniminuto.persistencia.Rol" fetch="select">
+            <column name="rol" not-null="true" />
+        </many-to-one>
+        <property name="nombres" type="string">
+            <column name="nombres" length="45" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="45" not-null="true" />
+        </property>
+        <property name="nacimiento" type="date">
+            <column name="nacimiento" length="10" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="100" not-null="true" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" length="45" not-null="true" />
+        </property>
+        <set name="compras" table="compra" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="comprador" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compra" />
+        </set>
+        <set name="compradiscos" table="compradisco" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vendedor" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compradisco" />
+        </set>
+        <set name="discopropietarios" table="discopropietario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="propietario" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Discopropietario" />
+        </set>
+        <set name="recopilacions" table="recopilacion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="propietario" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Recopilacion" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="comprador" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="songstock"/>
+  <table-filter match-name="pedidodisco"/>
+  <table-filter match-name="interprete"/>
+  <table-filter match-name="rol"/>
+  <table-filter match-name="disco"/>
+  <table-filter match-name="cancion"/>
+  <table-filter match-name="discopropietario"/>
+  <table-filter match-name="persona"/>
+  <table-filter match-name="compra"/>
+  <table-filter match-name="recopilacion"/>
+  <table-filter match-name="compradisco"/>
+  <table-filter match-name="pedidocancion"/>
+  <table-filter match-name="genero"/>
+  <table-filter match-name="recocancion"/>
+  <table-filter match-name="compracancion"/>
+  <table-filter match-name="pedido"/>
+  <table-filter match-name="discocancion"/>
+</hibernate-reverse-engineering>

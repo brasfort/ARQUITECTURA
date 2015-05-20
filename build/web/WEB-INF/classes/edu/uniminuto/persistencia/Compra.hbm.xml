@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Compra" table="compra" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="persona" class="edu.uniminuto.persistencia.Persona" fetch="select">
+            <column name="comprador" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="total" type="long">
+            <column name="total" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="65535" />
+        </property>
+        <set name="compradiscos" table="compradisco" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="compra" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compradisco" />
+        </set>
+        <set name="compracancions" table="compracancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="compra" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compracancion" />
+        </set>
+    </class>
+</hibernate-mapping>

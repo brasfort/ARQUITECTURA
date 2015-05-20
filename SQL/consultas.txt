@@ -1,0 +1,140 @@
+INSERT INTO interprete SELECT interprete FROM cancion
+
+
+INSERT INTO cancion (nombre, interprete, anhio, album)
+
+
+INSERT INTO disco (nombre, genero, imagen, interprete, precio, stock, anhio)
+
+
+SELECT album, genero.nombre, 'images/disco3.jpg', interprete.nombre, (FLOOR( 1(RAND() * 10)) * 10000, (FLOOR( RAND() * 10 )), anhio FROM canciontmp, genero, interprete WHERE canciontmp.genero = genero.nombre AND canciontmp.interprete = interprete.nombre GROUP BY album 
+
+
+SELECT album, genero.nombre, 'images/disco3.jpg', interprete.nombre, (FLOOR( 2 + RAND( ) * 7 )) * 10000, (FLOOR( 1 + RAND( ) * 6 )), anhio FROM canciontmp, genero, interprete WHERE canciontmp.genero = genero.nombre AND canciontmp.interprete = interprete.nombre GROUP BY album 
+
+
+
+
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE table1; 
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+
+INSERT INTO disco (nombre, genero, imagen, interprete, precio, stock, anhio)
+SELECT album, genero.id, CONCAT( 'images/disco', (
+FLOOR( 1 + RAND( ) *7 ) ) , '.jpg'
+), interprete.id, (FLOOR( 2 + RAND( ) * 7 )) * 10000, (FLOOR( 0 + RAND( ) * 7 )), anhio FROM canciontmp, genero, interprete WHERE canciontmp.genero = genero.nombre AND canciontmp.interprete = interprete.nombre GROUP BY album 
+
+
+
+
+
+
+
+
+
+UPDATE canciontmp SET genero = 'Other' WHERE genero LIKE '-%';
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE genero; 
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO genero (nombre) SELECT DISTINCT genero FROM canciontmp;
+
+
+
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE disco;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO disco (nombre, genero, imagen, interprete, precio, stock, anhio) 
+SELECT album, genero.id, CONCAT( 'images/disco', (
+FLOOR( 1 + RAND( ) *7 ) ) , '.jpg'
+), interprete.id, (FLOOR( 2 + RAND( ) * 7 )) * 10000, (FLOOR( 0 + RAND( ) * 7 )), anhio FROM canciontmp, genero, interprete WHERE canciontmp.genero = genero.nombre AND canciontmp.interprete = interprete.nombre GROUP BY album 
+
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE cancion;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+INSERT INTO cancion (nombre, interprete, anhio, album)
+SELECT canciontmp.nombre, interprete.id, canciontmp.anhio, disco.id FROM canciontmp, disco, interprete WHERE canciontmp.interprete = interprete.nombre AND canciontmp.album = disco.nombre ORDER BY canciontmp.id
+
+
+SET FOREIGN_KEY_CHECKS = 0; 
+TRUNCATE mp3;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
+
+SET FOREIGN_KEY_CHECKS = 0;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+ 
+TRUNCATE compra;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+TRUNCATE compradisco;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+TRUNCATE compracancion;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+TRUNCATE pedido;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+TRUNCATE pedidodisco;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+TRUNCATE pedidocancion;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+UPDATE discopropietario SET vendido = 0;# 2 filas afectadas.
+
+
+SET FOREIGN_KEY_CHECKS = 1;# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+# MySQL ha devuelto un conjunto de valores vacío (es decir: cero columnas).
+
+
+INSERT INTO mp3 (cancion, peso, calidad, duracion, precio)
+
+
+
+
+
+CREATE TABLE IF NOT EXISTS `discocancion` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `disco` int(11) NOT NULL,
+  `cancion` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_dc_disco` (`disco`),
+  KEY `fk_dc_cancion` (`cancion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `discocancion`
+--
+ALTER TABLE `discocancion`
+  ADD CONSTRAINT `fk_dc_disco` FOREIGN KEY (`disco`) REFERENCES `disco` (`id`),
+  ADD CONSTRAINT `fk_dc_cancion` FOREIGN KEY (`cancion`) REFERENCES `cancion` (`id`);
+
+
+
+
+
+ALTER TABLE pedidocancion 
+ADD CONSTRAINT  fk_pc_pedido 
+FOREIGN KEY (pedido) 
+REFERENCES pedido(id),
+ADD CONSTRAINT fk_pc_cancion FOREIGN KEY (cancion) REFERENCES cancion(id)

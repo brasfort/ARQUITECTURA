@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 12-mar-2015 13:21:12 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.uniminuto.persistencia.Cancion" table="cancion" catalog="songstock" optimistic-lock="version">
+        <id name="id" type="java.lang.Long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="interprete" class="edu.uniminuto.persistencia.Interprete" fetch="select">
+            <column name="interprete" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="250" not-null="true" />
+        </property>
+        <property name="anhio" type="string">
+            <column name="anhio" length="4" not-null="true" />
+        </property>
+        <property name="duracion" type="time">
+            <column name="duracion" length="8" not-null="true" />
+        </property>
+        <property name="peso" type="string">
+            <column name="peso" length="7" not-null="true" />
+        </property>
+        <property name="calidad" type="string">
+            <column name="calidad" length="3" not-null="true" />
+        </property>
+        <property name="precio" type="int">
+            <column name="precio" not-null="true" />
+        </property>
+        <set name="pedidocancions" table="pedidocancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cancion" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Pedidocancion" />
+        </set>
+        <set name="discocancions" table="discocancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cancion" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Discocancion" />
+        </set>
+        <set name="recocancions" table="recocancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cancion" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Recocancion" />
+        </set>
+        <set name="compracancions" table="compracancion" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cancion" not-null="true" />
+            </key>
+            <one-to-many class="edu.uniminuto.persistencia.Compracancion" />
+        </set>
+    </class>
+</hibernate-mapping>
